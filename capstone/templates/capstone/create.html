@@ -1,0 +1,23 @@
+{% extends "capstone/layout.html" %}
+
+{% block body %}
+    <h2 class="all_headings">Create a Quiz</h2>
+
+    <div id="note"><h3>
+        Note: Please specify whether the answer to a question has any numbers or symbols otherwise the quiz taker will not know how to answer.
+    </h3></div>
+        
+    <form action = "{% url 'create' %}" method="POST">
+        {% csrf_token %}
+        {% for field in quiz_form %}
+        <div id="create-form">
+            <div id="quiz_label">{{ field.label_tag }}</div>
+            <div>{{ field }}</div> 
+            <div id="help-text">{{ field.help_text }}</div>
+        </div>
+            <br>
+        {% endfor %}
+        
+        <input type="submit" value="Create" class="button">
+    </form>
+{% endblock %}

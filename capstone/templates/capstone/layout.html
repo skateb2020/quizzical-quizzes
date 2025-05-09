@@ -1,0 +1,38 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}Quizzical Quizzes{% endblock %}</title>
+        <link href="{% static 'capstone/styles.css' %}" rel="stylesheet">
+        <link rel="icon" href="data:;base64,=">
+        <script src="{% static 'capstone/capstone.js' %}"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <header class="header">
+            <h1 id="heading">Quizzical Quizzes</h1>
+            <h2>
+            {% if request.user.is_authenticated %}
+                <span id="helloUser">Hello, <a id="user_url" href="{% url 'user' request.user.id %}">{{ request.user }}</a></span>
+                <a class="url" href="{% url 'index' %}">Home</a>
+                <a class="url" href="{% url 'all_quizzes' %}">All Quizzes</a>
+                <a id="logout" class="url" href="{% url 'logout' %}">Logout</a>
+                <a class="url" href="{% url 'create' %}">Create Quiz</a>
+                <a class="url" href="{% url 'random_quiz' %}">Random Quiz</a>
+            {% else %}
+                <a class="url" href="{% url 'index' %}">Home</a>
+                <a class="url" href="{% url 'all_quizzes' %}">All Quizzes</a>
+                <a class="url" href="{% url 'login' %}">Login</a>
+                <a class="url" href="{% url 'register' %}">Join</a>
+                <a class="url" href="{% url 'create' %}">Create Quiz</a>
+                <a class="url" href="{% url 'random_quiz' %}">Random Quiz</a>
+            {% endif %}
+            </h2>
+            <br>
+            <br>
+        </header>
+        {% block body %}
+        {% endblock %}
+    </body>
+</html>

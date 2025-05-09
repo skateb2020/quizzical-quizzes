@@ -1,0 +1,27 @@
+{% extends "capstone/layout.html" %}
+
+{% block body %}
+    <h1 class="all_headings" id="quiz_title">{{ quiz.title }}</h1>
+    <h4 class="quiz_description">By: {{ quiz.user }}</h4>
+    <h4 class="quiz_description">Created On: {{ quiz.date_and_time }}</h4>
+    <div id="description">{{ quiz.description }}</div>
+    <br>
+
+    {% for q in quiz_questions %}
+        <h3 class="quiz_questions">{{q.1}}
+            <input type="text" id="id_question{{q.0}}" class="input"> 
+        </h3>
+        <div id="div{{ q.0 }}"></div>
+        <br>
+        <br>
+    {% endfor %}
+    <button class="button quiz_button" id="{{ quiz.id }}" name="bt_inputs" disabled>Submit</button>
+    
+ 
+    <h2 id="score"></h2>
+    <input type="hidden" id="user_id" value="{{ request.user.id }}">
+    <input type="hidden" id="user_points" value="{{ request.user.points }}">
+    {% if request.user.is_anonymous %}
+        <h3 class="all_headings"><a href="{% url 'register' %}">Join now</a> to earn 10 points for every question you answer correctly!</h3>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "capstone/layout.html" %}
+
+{% block body %}
+    <h1 class="all_headings" id="title">Quizzical Quizzes</h1>
+    <div id="intro_message">
+        <h3>Welcome to Quizzical Quizzes, a fun website where you can create and take quizzes! Quizzical Quizzes can be used for a variety of purposes. You can make quizzes for you or others to play for fun; you can make quizzes to quiz your friends about yourself or even make quizzes to study for an upcoming test. Whatever your purpose, Quizzical Quizzes is the best place to be. Remember, if you sign up, you will receive 10 points for every question you answer correctly.</h3>
+    </div>
+    <h2 class="all_headings">Newest Quizzes</h2>
+
+    {% for quiz in quizzes %}
+    <a href="{% url 'quiz' quiz.id %}">
+        <div class="individual_quizzes">
+            <h3 class="quiz_elements"> {{ quiz.title }} </h3>
+            <h3 class="quiz_elements">By: {{ quiz.user }} </h3>
+            <h3 class="quiz_elements">Created on: {{ quiz.date_and_time }}</h3>
+        </div>
+    </a>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "capstone/layout.html" %}
+
+{% block body %}
+    <h2 class="registration_page">Login</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        {% for field in login_form %}
+        <h4 class="registration_page">{{ field.label_tag }}
+            {{ field }}
+            {% if field.help_text %}
+                <span>{{ field.help_text }}</span>
+            {% endif %}
+
+                {% for error in field.errors %}
+                    <p class="error">{{ error }}</p>
+                {% endfor %}
+            {% if login_form.non_field_errors %} 
+                <div class="error">{{ login_form.non_field_errors }}</div>
+            {% endif %}
+        </h4>
+    {% endfor %}
+        <button type="submit" class="button">Login</button>
+      </form>
+
+
+    <h4 class="registration_page">Not a member? <a href="{% url 'register' %}">Join now</a> to earn points for every correctly answered question.</h4>
+
+{% endblock %}
